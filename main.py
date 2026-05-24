@@ -13,7 +13,7 @@ wall_y=0
 x=float(80 * scale)
 y=float(100 * scale)
 
-
+print("something")
 
 wall_rect = pygame.Rect(0, 0, int(20*scale), int(700*scale))
 level_blocks = [
