@@ -7,13 +7,35 @@ player=pygame.image.load('player.png')
 scale = 0.5
 player_scale = 0.2
 player = pygame.transform.scale(player, (int(player.get_width() * player_scale), int(player.get_height() * player_scale)))
+
 screen=pygame.display.set_mode((1920, 1080))
+saw = pygame.image.load('f520849307b5501.webp').convert_alpha()
+saw_image = pygame.transform.scale(saw, (int(40*scale), int(40*scale)))
 wall_x=0
 wall_y=0
-x=float(80 * scale)
-y=float(100 * scale)
+spawn_x = 80 * scale
+spawn_y = 100 * scale
+x=float(spawn_x)
+y=float(spawn_y)
+
+saw_rects = [
+    pygame.Rect(int(420*scale), int(980*scale), int(40*scale), int(40*scale)),
+    pygame.Rect(int(760*scale), int(310*scale), int(40*scale), int(40*scale)),
+    pygame.Rect(int(1450*scale), int(340*scale), int(40*scale), int(40*scale)),
+]
 
 
+def respawn():
+    global x, y, velocity_x, velocity_y, on_ground, on_ceiling, on_wall, wall_run_active, current_wall_rect
+    x = float(spawn_x)
+    y = float(spawn_y)
+    velocity_x = 0.0
+    velocity_y = 0.0
+    on_ground = False
+    on_ceiling = False
+    on_wall = False
+    wall_run_active = False
+    current_wall_rect = None
 
 wall_rect = pygame.Rect(0, 0, int(20*scale), int(1050*scale))
 level_blocks = [
@@ -54,6 +76,8 @@ while running:
     hitbox=pygame.Rect(int(x), int(y), player.get_width(), player.get_height())
     for block_type, block_rect in level_blocks:
         pygame.draw.rect(screen, block_colors[block_type], block_rect)
+    for saw_rect in saw_rects:
+        screen.blit(saw_image, (saw_rect.x, saw_rect.y))
     pygame.draw.rect(screen,(55,52,19),wall_run_zone)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -139,6 +163,13 @@ while running:
                     break
 
     hitbox = pygame.Rect(int(x), int(y), player.get_width(), player.get_height())
+
+    for saw_rect in saw_rects:
+        if hitbox.colliderect(saw_rect):
+            respawn()
+            hitbox = pygame.Rect(int(x), int(y), player.get_width(), player.get_height())
+            break
+
     wall_run_active = on_wall
 
     # Horizontal collisions
