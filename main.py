@@ -7,23 +7,25 @@ player=pygame.image.load('player.png')
 scale = 0.5
 player_scale = 0.2
 player = pygame.transform.scale(player, (int(player.get_width() * player_scale), int(player.get_height() * player_scale)))
-screen=pygame.display.set_mode((1280, 720))
+screen=pygame.display.set_mode((1920, 1080))
 wall_x=0
 wall_y=0
 x=float(80 * scale)
 y=float(100 * scale)
 
-print("something")
 
-wall_rect = pygame.Rect(0, 0, int(20*scale), int(700*scale))
+
+wall_rect = pygame.Rect(0, 0, int(20*scale), int(1050*scale))
 level_blocks = [
-    ("floor", pygame.Rect(0, int(700*scale), int(1280*scale), int(40*scale))),
+    ("floor", pygame.Rect(0, int(1050*scale), int(1920*scale), int(40*scale))),
     ("wall", wall_rect),
-    ("ceiling", pygame.Rect(0, 0, int(1280*scale), int(20*scale))),
-    ("wall", pygame.Rect(int(100), int(150*scale), int(20*scale), int(550*scale))),
+    ("ceiling", pygame.Rect(0, 0, int(1920*scale), int(20*scale))),
+    ("wall", pygame.Rect(int(100), int(150*scale), int(20*scale), int(900*scale))),
     ("platform", pygame.Rect(int(200*scale), int(520*scale), int(200*scale), int(20*scale))),
     ("platform", pygame.Rect(int(520*scale), int(430*scale), int(200*scale), int(20*scale))),
     ("platform", pygame.Rect(int(860*scale), int(340*scale), int(200*scale), int(20*scale))),
+    ("platform", pygame.Rect(int(1200*scale), int(250*scale), int(200*scale), int(20*scale))),
+    ("platform", pygame.Rect(int(1500*scale), int(380*scale), int(200*scale), int(20*scale))),
 ]
 wall_run_zone = pygame.Rect(wall_rect.right, 0, int(10*scale), int(700*scale))
 block_colors = {
