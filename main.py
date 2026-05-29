@@ -11,10 +11,11 @@ clock = pygame.time.Clock()
 
 # scaling and assets
 scale = 0.8
-player_scale = 0.28
+player_scale = 0.15
 saw_scale = 3
-level_id = 3
+level_id = 1
 spawn_id=1
+saw_angle = 0
 
 screen = pygame.display.set_mode((1920, 1080))
 background_image = pygame.image.load('background.png').convert()
@@ -25,7 +26,7 @@ if level_id == 1:
     level = Level1(saw_scale,scale)
     # scale saw image to match previous size
     saw_image = pygame.transform.scale(level.saw_image_raw, (int(40 * saw_scale), int(40 * saw_scale)))
-    saw_angle = 0
+
 
 player = Player('player (2).png', 100, 900, player_scale)
 
@@ -39,7 +40,7 @@ jump_speed = 14
 running = True
 while running:
     clock.tick(60)
-    screen.fill((255, 255, 255))
+    screen.blit(background_image, (0, 0))
     if level_id == 1 or level_id == 2:
         finish_rect = pygame.Rect(int(1800), int(280), int(100), int(250))
         pygame.draw.rect(screen, (0, 255, 0), finish_rect)
