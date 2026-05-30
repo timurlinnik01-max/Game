@@ -94,6 +94,19 @@ class Player:
             self.on_ceiling = False
 
         if self.on_wall:
+            # Check the player is still actually touching the wall this frame.
+            # Inflate by a few pixels horizontally so the snapped position never
+            # produces a false "not touching" result, while still catching the
+            # case where the wall has ended vertically (player slid off the bottom).
+            if self.current_wall_rect:
+                hitbox_check = pygame.Rect(int(self.x), int(self.y), self.base_image.get_width(), self.base_image.get_height())
+                inflated = hitbox_check.inflate(6, 0)
+                if not inflated.colliderect(self.current_wall_rect):
+                    self.on_wall = False
+                    self.wall_run_active = False
+                    self.current_wall_rect = None
+
+        if self.on_wall:
             is_on_right_side = self.current_wall_rect and self.x + self.base_image.get_width() / 2 > self.current_wall_rect.centerx
 
             if keys[pygame.K_w]:
