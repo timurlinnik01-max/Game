@@ -1,8 +1,8 @@
 import pygame
 from player import Player
-from map_elements import Level1
-from map_elements import Level2
-from map_elements import Level3
+from levels import Level1
+from levels import Level2
+from levels import Level3
 
 import math
 
