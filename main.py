@@ -50,11 +50,11 @@ button_height = 90
 start_button_rect = pygame.Rect((screen.get_width() - button_width) // 2, 420, button_width, button_height)
 exit_button_rect = pygame.Rect((screen.get_width() - button_width) // 2, 540, button_width, button_height)
  
-# Load wall and platform tile images once
+
 wall_tile_raw = pygame.image.load('wall.png').convert_alpha()
 platform_tile_raw = pygame.image.load('platform.png').convert_alpha()
  
-# Scale tiles to sensible sizes (keep aspect ratio, cap height)
+
 WALL_TILE_W = wall_tile_raw.get_width()
 WALL_TILE_H = wall_tile_raw.get_height()
 PLATFORM_TILE_W = platform_tile_raw.get_width()
@@ -62,13 +62,13 @@ PLATFORM_TILE_H = platform_tile_raw.get_height()
  
  
 def draw_tiled(surface, tile, rect):
-    """Tile `tile` image to fill `rect` by clipping each tile piece."""
+   
     tw = tile.get_width()
     th = tile.get_height()
     x0, y0, rw, rh = rect.x, rect.y, rect.width, rect.height
     for row in range(0, rh, th):
         for col in range(0, rw, tw):
-            # How much of this tile actually fits
+            
             blit_w = min(tw, rw - col)
             blit_h = min(th, rh - row)
             area = pygame.Rect(0, 0, blit_w, blit_h)
@@ -80,7 +80,7 @@ def draw_level_blocks(surface, level_blocks, wall_tile, platform_tile, block_col
         if block_type == "wall":
             draw_tiled(surface, wall_tile, block_rect)
         else:
-            # platform, floor and ceiling all use the platform texture
+     
             draw_tiled(surface, platform_tile, block_rect)
 
 
@@ -97,7 +97,7 @@ def load_leaderboard(path=leaderboard_file):
                     except ValueError:
                         continue
                 elif len(parts) == 2:
-                    # Handle old format without deaths
+                  
                     name, time_str = parts
                     try:
                         records.append((name, float(time_str), 0))
@@ -201,14 +201,14 @@ def draw_blood_splashes(surface, splashes, dt):
         surface.blit(blood_surface, (splash["pos"][0] - splash_size // 2, splash["pos"][1] - splash_size // 2))
 
 
-# Build level and player objects
+
 if level_id == 1:
     level = Level1(saw_scale, scale)
     saw_image = pygame.transform.scale(level.saw_image_raw, (int(40 * saw_scale), int(40 * saw_scale)))
  
 player = Player('player (2).png', 100, 900, player_scale)
  
-# Use tiles at their natural resolution — draw_tiled will repeat them without stretching
+
 wall_tile = wall_tile_raw
 platform_tile = platform_tile_raw
  

@@ -39,7 +39,7 @@ class Level1:
             "platform": (80, 120, 210),
         }
 
-        # Load saw image once; calling code will scale it as needed
+  
         self.saw_image_raw = pygame.image.load('f520849307b5501.webp').convert_alpha()
 class Level2:
     def __init__(self,saw_scale,scale):
@@ -170,21 +170,19 @@ class Level4:
             ("wall", pygame.Rect(int(1460 * scale), 0, int(20 * scale), int(1000 * scale))),
             ("wall", pygame.Rect(int(350 * scale), int(300 * scale), int(20 * scale), int(2000 * scale))),
             ("ceiling", pygame.Rect(0, 0, int(1920), int(20))),
- #           ("platform", pygame.Rect(int(0 * scale), int(200* scale), int(420 * scale), int(20 * scale))),
+
             ("platform", pygame.Rect(int(350 * scale), int(300 * scale), int(380 * scale), int(20 * scale))),
             ("platform", pygame.Rect(int(1100 * scale), int(980 * scale), int(380 * scale), int(20 * scale))),
-            #("platform", pygame.Rect(int(260 * scale), int(760 * scale), int(320 * scale), int(20 * scale))),
+
             ("platform", pygame.Rect(int(1800 * scale), int(460 * scale), int(1000 * scale), int(20 * scale))),
             ("wall", pygame.Rect(int(730 * scale), int(300 * scale), int(20 * scale), int(2000 * scale))),
             ("wall", pygame.Rect(int(1800 * scale), int(460 * scale), int(20 * scale), int(2000 * scale))),
             ("wall", pygame.Rect(int(1100 * scale), int(0 * scale), int(20 * scale), int(1000 * scale))),
             ("wall", pygame.Rect(int(2150 * scale), int(0 * scale), int(20 * scale), int(280 * scale))),
-            #("platform", pygame.Rect(int(1320 * scale), int(740 * scale), int(150 * scale), int(20 * scale))),
-           # ("platform", pygame.Rect(int(1520 * scale), int(260 * scale), int(320 * scale), int(20 * scale))),
+
         ]
         self.saw_rects = [
-            #pygame.Rect(int(1880 * scale), int(50 * scale), int(40 * saw_scale), int(40 * saw_scale)),
-            #pygame.Rect(int(2050 * scale), int(50 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+
             pygame.Rect(int(280 * scale), int(1000 * scale), int(40 * saw_scale), int(40 * saw_scale)),
             pygame.Rect(int(280 * scale), int(400 * scale), int(40 * saw_scale), int(40 * saw_scale)),
             pygame.Rect(int(-50 * scale), int(700 * scale), int(40 * saw_scale), int(40 * saw_scale)),

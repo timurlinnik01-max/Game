@@ -3,10 +3,7 @@ import pygame
 
 
 def circle_collision(circle_x, circle_y, circle_radius, rect):
-    """Check if a circle collides with a rectangle's circular hitbox.
-    Uses distance-based collision between circle centers.
-    """
-    # Rect is treated as having a circular hitbox with radius = half its width/height
+
     saw_radius = rect.width / 2
     dx = circle_x - rect.centerx
     dy = circle_y - rect.centery
@@ -109,10 +106,7 @@ class Player:
             self.on_ceiling = False
 
         if self.on_wall:
-            # Check the player is still actually touching the wall this frame.
-            # Inflate by a few pixels horizontally so the snapped position never
-            # produces a false "not touching" result, while still catching the
-            # case where the wall has ended vertically (player slid off the bottom).
+
             if self.current_wall_rect:
                 hitbox_check = pygame.Rect(int(self.x), int(self.y), self.base_image.get_width(), self.base_image.get_height())
                 inflated = hitbox_check.inflate(6, 0)
@@ -237,7 +231,6 @@ class Player:
                     hitbox.y = int(self.y)
                     break
 
-        # choose sprite state after movement and collision
         if self.on_wall:
             self.set_action("wall_run")
         elif not self.on_ground:
