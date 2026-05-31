@@ -115,7 +115,7 @@ class Level3:
             ("wall", pygame.Rect(int(880 * scale), int(150 * scale), int(20 * scale), int(860 * scale))),
             ("wall", pygame.Rect(int(1060 * scale), int(0 * scale), int(20 * scale), int(320 * scale))),
             ("platform", pygame.Rect(int(200 * scale), int(480 * scale), int(430 * scale), int(20 * scale))),
-            ("platform", pygame.Rect(int(200 * scale), int(350 * scale), int(700 * scale), int(20 * scale))),
+            ("platform", pygame.Rect(int(0 * scale), int(350 * scale), int(700 * scale), int(20 * scale))),
             ("platform", pygame.Rect(int(200 * scale), int(150 * scale), int(700 * scale), int(20 * scale))),
             ("platform", pygame.Rect(int(770 * scale), int(550 * scale), int(110 * scale), int(20 * scale))),
             ("wall", pygame.Rect(int(1200 * scale), int(-300 * scale), int(20 * scale), int(450 * scale))),
@@ -129,7 +129,7 @@ class Level3:
             ("platform", pygame.Rect(int(1300 * scale), int(1110 * scale), int(200 * scale), int(20 * scale))),
             ("platform", pygame.Rect(int(1380 * scale), int(200 * scale), int(300 * scale), int(20 * scale))),
             ("platform", pygame.Rect(int(2000 * scale), int(1100 * scale), int(200 * scale), int(20 * scale))),
-            ("platform", pygame.Rect(int(1950 * scale), int(200 * scale), int(250 * scale), int(20 * scale))),
+            ("platform", pygame.Rect(int(1900 * scale), int(200 * scale), int(250 * scale), int(20 * scale))),
             ]
         self.saw_rects = [
             pygame.Rect(int(560 * scale), int(725 * scale), int(40 * saw_scale), int(40 * saw_scale)),
@@ -152,3 +152,60 @@ class Level3:
             "platform": (80, 120, 210),
         }
         self.saw_image_raw = pygame.image.load('f520849307b5501.webp').convert_alpha()
+
+
+
+class Level4:
+    def __init__(self,saw_scale,scale):
+        self.saw_scale = saw_scale
+        self.scale = scale
+        self.wall_x = 0
+        self.wall_y = 0
+        self.spawn_x = 80
+        self.spawn_y = 900
+        wall_rect = pygame.Rect(0, 0, int(20), int(1050))
+        self.level_blocks = [
+            ("floor", pygame.Rect(0, int(1050), int(1920), int(40))),
+            ("wall", wall_rect),
+            ("wall", pygame.Rect(int(1460 * scale), 0, int(20 * scale), int(1000 * scale))),
+            ("wall", pygame.Rect(int(350 * scale), int(300 * scale), int(20 * scale), int(2000 * scale))),
+            ("ceiling", pygame.Rect(0, 0, int(1920), int(20))),
+ #           ("platform", pygame.Rect(int(0 * scale), int(200* scale), int(420 * scale), int(20 * scale))),
+            ("platform", pygame.Rect(int(350 * scale), int(300 * scale), int(380 * scale), int(20 * scale))),
+            ("platform", pygame.Rect(int(1100 * scale), int(980 * scale), int(380 * scale), int(20 * scale))),
+            #("platform", pygame.Rect(int(260 * scale), int(760 * scale), int(320 * scale), int(20 * scale))),
+            ("platform", pygame.Rect(int(1800 * scale), int(460 * scale), int(1000 * scale), int(20 * scale))),
+            ("wall", pygame.Rect(int(730 * scale), int(300 * scale), int(20 * scale), int(2000 * scale))),
+            ("wall", pygame.Rect(int(1800 * scale), int(460 * scale), int(20 * scale), int(2000 * scale))),
+            ("wall", pygame.Rect(int(1100 * scale), int(0 * scale), int(20 * scale), int(1000 * scale))),
+            ("wall", pygame.Rect(int(2150 * scale), int(0 * scale), int(20 * scale), int(280 * scale))),
+            #("platform", pygame.Rect(int(1320 * scale), int(740 * scale), int(150 * scale), int(20 * scale))),
+           # ("platform", pygame.Rect(int(1520 * scale), int(260 * scale), int(320 * scale), int(20 * scale))),
+        ]
+        self.saw_rects = [
+            #pygame.Rect(int(1880 * scale), int(50 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            #pygame.Rect(int(2050 * scale), int(50 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(280 * scale), int(1000 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(280 * scale), int(400 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(-50 * scale), int(700 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(670 * scale), int(400 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(1750 * scale), int(800 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(0 * scale), int(0 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(950 * scale), int(0 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(1030 * scale), int(650 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(1200 * scale), int(1200 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(1400 * scale), int(600 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(650 * scale), int(1000 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+            pygame.Rect(int(1750 * scale), int(400 * scale), int(40 * saw_scale), int(40 * saw_scale)),
+        ]
+        self.wall_run_zone = pygame.Rect(wall_rect.right, 0, int(10), int(700))
+        self.block_colors = {
+            "floor": (55, 52, 198),
+            "wall": (55, 52, 198),
+            "ceiling": (55, 52, 198),
+            "platform": (80, 120, 210),
+        }
+        self.saw_image_raw = pygame.image.load('f520849307b5501.webp').convert_alpha()
+
+
+

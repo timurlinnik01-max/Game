@@ -1,0 +1,3 @@
+tester_1|47.05|0
+tester1|53.72|2
+final_test|64.67|4

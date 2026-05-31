@@ -2,6 +2,18 @@ import math
 import pygame
 
 
+def circle_collision(circle_x, circle_y, circle_radius, rect):
+    """Check if a circle collides with a rectangle's circular hitbox.
+    Uses distance-based collision between circle centers.
+    """
+    # Rect is treated as having a circular hitbox with radius = half its width/height
+    saw_radius = rect.width / 2
+    dx = circle_x - rect.centerx
+    dy = circle_y - rect.centery
+    distance = math.sqrt(dx * dx + dy * dy)
+    return distance < (circle_radius + saw_radius)
+
+
 class Player:
     def __init__(self, image_path, spawn_x, spawn_y, player_scale):
         self.player_scale = player_scale
@@ -20,6 +32,8 @@ class Player:
         self.on_wall = False
         self.wall_run_active = False
         self.current_wall_rect = None
+        self.hit_by_saw = False
+        self.hit_position = None
 
     def load_sprites(self, image_path):
         def load(path):
@@ -86,6 +100,7 @@ class Player:
             dx = -speed
             self.facing_right = False
         if keys[pygame.K_w] and self.on_ground:
+            pygame.mixer.Sound.play(pygame.mixer.Sound("jump2.mp3"))
             self.velocity_y = -jump_speed
             self.velocity_x = 0.0
             self.on_ground = False
@@ -112,6 +127,7 @@ class Player:
             if keys[pygame.K_w]:
                 self.on_wall = False
                 self.wall_run_active = False
+                pygame.mixer.Sound.play(pygame.mixer.Sound("jump2.mp3"))
                 if is_on_right_side:
                     jump_magnitude = jump_speed * wall_run_jump_multiplier
                     self.velocity_x = jump_magnitude * math.cos(math.radians(45))
@@ -168,8 +184,11 @@ class Player:
         hitbox = pygame.Rect(int(self.x), int(self.y), self.base_image.get_width(), self.base_image.get_height())
 
         for saw_rect in saw_rects:
-            if hitbox.colliderect(saw_rect):
+            if circle_collision(hitbox.centerx, hitbox.centery, hitbox.width / 2, saw_rect):
+                self.hit_by_saw = True
+                self.hit_position = hitbox.center               
                 self.respawn()
+                pygame.mixer.Sound.play(pygame.mixer.Sound("death.mp3"))
                 hitbox = pygame.Rect(int(self.x), int(self.y), self.base_image.get_width(), self.base_image.get_height())
                 break
 
